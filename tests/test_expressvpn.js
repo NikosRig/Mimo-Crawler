@@ -1,7 +1,7 @@
 
 const assert = require('assert');
 
-const expressvpn = require('../src/extensions/expressvpn');
+const expressvpn = require('../src/Services/expressvpn');
 
 const { describe } = require("mocha");
 

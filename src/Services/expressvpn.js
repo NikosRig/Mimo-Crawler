@@ -18,7 +18,7 @@ class expressvpn extends EventEmitter {
 
     /*
     * Get all expressvpn country aliases
-    * @return {array} alises list
+    * @return {array} aliases list
     * */
     getCountryAliases =   () => {
 
@@ -65,7 +65,7 @@ class expressvpn extends EventEmitter {
 
     /*
     *   Disconnect from expressvpn
-    *   @eventEmit {Disconnected} fires event
+    *   @event {Disconnected} fires event
     * */
     disconnect = () => {
 
@@ -144,7 +144,7 @@ class expressvpn extends EventEmitter {
     childErrorLogHandler = (childProcess, customMessage) => {
 
         childProcess.stderr.on('data', (stderr) => {
-            logger.error(stderr + ' ' + customMessage);
+            logger.error(stderr);
         });
 
         childProcess.on('error', () => {
