@@ -1,0 +1,27 @@
+{
+  "name": "mimo",
+  "version": "1.0.0",
+  "description": "",
+  "author": "Nikos Rigas",
+  "license": "ISC",
+  "main": "index.js",
+  "scripts": {
+    "wsserver": "node ./src/websocket/websocketServer.js",
+    "heartbeat": "node ./src/websocket/heartbeat.js",
+    "test:expressvpn": "./node_modules/mocha/bin/mocha ./tests/test_expressvpn.js",
+    "test:expressvpn_autoconnect": "/usr/bin/node /home/nikr/code/mimo/node_modules/mocha/bin/mocha  /home/nikr/code/mimo/tests/test_expressvpn.js --grep \"^Testing Expressvpn Connect should pass if the auto reconnection was successful$\""
+
+  },
+  "dependencies": {
+    "child_process": "^1.0.2",
+    "find-process": "^1.4.3",
+    "js-middleware": "^0.3.1",
+    "mocha": "^7.1.2",
+    "process": "^0.11.10",
+    "require-dir": "^1.2.0",
+    "robotjs": "^0.6.0",
+    "unique-random-array": "^2.0.0",
+    "winston": "^3.2.1",
+    "ws": "^7.2.5"
+  }
+}
