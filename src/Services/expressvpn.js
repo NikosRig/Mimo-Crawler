@@ -53,36 +53,46 @@ class expressvpn extends EventEmitter {
     * */
     getStatus = () => {
 
-        let status =  spawnSync('expressvpn', ['status'], {stdio: 'pipe'}).stdout;
+        return new Promise((resolve, reject) => {
 
-        if (String(status).search('Connected to') !== -1)
-            return 'connected';
-        else if (String(status).search('Connecting') !== -1)
-            return 'connecting';
-        else
-            return 'not connected'
+            let status =  spawnSync('expressvpn', ['status'], {stdio: 'pipe'});
+
+            if (String(status.stderr) != '')  {
+                logger.error(String(status.stderr));
+                reject();
+            }
+
+            resolve(String(status.stdout));
+        });
+
     }
 
     /*
     *   Disconnect from expressvpn
-    *   @event {Disconnected} fires event
+    *   @event {Disconnected} Triggers the Disconnected event
     * */
     disconnect = () => {
-
-        if (this.getStatus() === 'not connected') {
-            this.emit('Disconnected');
-            return;
-        }
 
         let disconnect =  spawn('expressvpn', ['disconnect']);
 
         disconnect.stdout.on('data', (data) => {
 
             if (String(data).search('Disconnected') !== -1)
-                this.emit('Disconnected');
+                this.emit('vpn:disconnected');
+
         });
 
-        this.childErrorLogHandler(disconnect, 'disconnect error');
+        disconnect.stderr.on('data', (stderr) => {
+
+            if (String(stderr).search('Disconnected.') !== -1) {
+                this.emit('vpn:disconnected');
+                return;
+            }
+
+            logger.error(stderr);
+        });
+
+        this.keepLogsOnProcessError(disconnect, false);
     }
 
 
@@ -93,16 +103,26 @@ class expressvpn extends EventEmitter {
     * */
     autoConnect = (randomly = true, countryAlias) => {
 
-        this.on('Disconnected', () => {
+        this.on('vpn:disconnected', async () => {
 
-            if (this.getStatus() !== 'not connected') {
+            let status = await this.getStatus();
 
+            if (status.search('Not connected') === -1)
                 this.disconnect();
 
-                return;
-            }
-
             this.connect(randomly, countryAlias);
+
+            /*         this.getStatus().then((status) => {
+
+                         if (status.search('Not connected') !== -1) {
+                             this.disconnect();
+                             return;
+                         }
+                         this.connect(randomly, countryAlias);
+
+                     });*/
+
+
 
         });
 
@@ -128,27 +148,33 @@ class expressvpn extends EventEmitter {
         });
 
         connect.stderr.on('data', (data) => {
-            this.disconnect();
+                this.emit('ConnectFailed');
+
+                this.emit('reconnect');
         });
 
-        this.childErrorLogHandler(connect, 'connect error');
+        this.keepLogsOnProcessError(connect, true);
 
     }
 
 
     /*
-    *  On child error, hold logs
+    *  Writes the error log on child process error
     *  @param child process {object}
-    *  @param customMessage {string}
+    *  @param writeStderr {boolean} true to write stderr
     * */
-    childErrorLogHandler = (childProcess, customMessage) => {
 
-        childProcess.stderr.on('data', (stderr) => {
-            logger.error(stderr);
-        });
+    keepLogsOnProcessError = (childProcess, writeStderr = false) => {
 
         childProcess.on('error', () => {
-            logger.error(customMessage);
+            logger.error('expressvpn process error');
+        });
+
+        if (!writeStderr)
+            return;
+
+        childProcess.stderr.on('data', (stderr) => {
+            logger.error(String(stderr));
         });
 
     }

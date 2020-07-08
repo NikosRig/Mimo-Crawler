@@ -1,9 +1,32 @@
 
-const assert = require('assert');
+const { describe } = require("mocha");
+
+const chai = require("chai");
+
+const expect = chai.expect;
+
+const sinon = require('sinon');
 
 const expressvpn = require('../src/Services/expressvpn');
 
-const { describe } = require("mocha");
+
+
+describe("Testing Expressvpn status", () => {
+
+    it("checks if the status promise is resolved", () => {
+
+        expressvpn.getStatus().then((status) => {
+
+           chai.assert.typeOf(status, 'string');
+
+        }).catch(() => {
+            chai.assert.fail();
+        });
+
+    });
+
+});
+
 
 describe('Testing Expressvpn Disconnect', () => {
 
@@ -22,7 +45,7 @@ describe('Testing Expressvpn Connect', () => {
 
     it('should pass if successful connection event is fired',  (done) => {
 
-        expressvpn.once('Disconnected', () => {
+        expressvpn.once('vpn:disconnected', () => {
 
             expressvpn.once('Connected', () => { done() });
 
@@ -31,6 +54,17 @@ describe('Testing Expressvpn Connect', () => {
         });
 
         expressvpn.disconnect();
+
+    }).timeout(25000);
+
+
+
+
+    it('checks connect failure event',  (done) => {
+
+        expressvpn.once('ConnectFailed', () => { done() });
+
+        expressvpn.connect();
 
     }).timeout(25000);
 
@@ -48,3 +82,4 @@ describe('Testing Expressvpn Connect', () => {
 
 
 });
+
