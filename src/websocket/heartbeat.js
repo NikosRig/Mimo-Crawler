@@ -2,7 +2,9 @@ require('process').title = 'MimoHeartbeat';
 
 const WebSocket = require('ws');
 
-const logger = require('../logging/Logger');
+const path = require('path');
+
+const logger = require(path.resolve(__dirname, '../Logging/Logger'));
 
 
 
