@@ -1,6 +1,9 @@
 const EventEmitter = require('events');
 
-const logger = require('../Logging/Logger');
+const path = require('path');
+
+
+const logger = require(path.resolve(__dirname, '../../Logging/Logger'));
 
 const {spawn, spawnSync} = require('child_process');
 
