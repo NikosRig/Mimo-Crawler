@@ -19,6 +19,38 @@ class validator {
     };
 
 
+    isObjectMethodExists = (object, method) =>
+    {
+        if (typeof object[method] == 'function')
+            return true;
+
+        return false;
+    };
+
+
+    isPropertyExists = (object, propertyName) =>
+    {
+        return object.hasOwnProperty(propertyName);
+    }
+
+
+    isAsyncFunction = (func) =>
+    {
+        if (func.constructor.name === "AsyncFunction")
+            return true;
+
+        return false;
+    }
+
+
+    isPromise = (func) =>
+    {
+        if (func instanceof Promise)
+            return true;
+
+        return false;
+    }
+
 }
 
 
