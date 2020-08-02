@@ -9,7 +9,7 @@
     "wsserver": "node ./src/websocket/websocketServer.js",
     "heartbeat": "node ./src/websocket/heartbeat.js",
     "test:expressvpn": "./node_modules/mocha/bin/mocha ./tests/test_expressvpn.js",
-    "test:expressvpn_autoconnect": "/usr/bin/node /home/nikr/code/mimo/node_modules/mocha/bin/mocha  /home/nikr/code/mimo/tests/test_expressvpn.js --grep \"^Testing Expressvpn Connect should pass if the auto reconnection was successful$\""
+    "test:middleware": "./node_modules/mocha/bin/mocha ./tests/test_middleware.js"
   },
   "dependencies": {
     "child_process": "^1.0.2",
