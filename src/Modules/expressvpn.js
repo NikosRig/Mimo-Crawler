@@ -103,7 +103,7 @@ class expressvpn extends EventEmitter {
     *  @param randomly {boolean} connect in random country or not
     *  @param countryAlias {string} connect to specific country
     * */
-    autoConnect = (randomly = true, countryAlias) => {
+    autoConnect = (props = {randomly: true, countryAlias: ''}) => {
 
         this.on('vpn:disconnected', async () => {
 
@@ -112,7 +112,7 @@ class expressvpn extends EventEmitter {
             if (status.search('Not connected') === -1)
                 this.disconnect();
 
-            this.connect(randomly, countryAlias);
+            this.connect(props);
 
             /*         this.getStatus().then((status) => {
 
@@ -135,14 +135,15 @@ class expressvpn extends EventEmitter {
     *  @param randomly {boolean} connect in random country or not
     *  @param countryAlias {string} connect to specific country
     * */
-    connect = (randomly = true, countryAlias) => {
+    connect = (props = {randomly: true, countryAlias: ''}) => {
 
         return new Promise((resolve, reject) =>
         {
-            if (randomly)
-                countryAlias = this.getRandomCountry();
+            if (props.randomly)
+                props.countryAlias = this.getRandomCountry();
 
-            let connect =  spawn('expressvpn', ['connect', countryAlias], {stdio: 'pipe', shell: true});
+
+            let connect =  spawn('expressvpn', ['connect', props.countryAlias], {stdio: 'pipe', shell: true});
 
             this.keepLogsOnProcessError(connect, true);
 
