@@ -1,7 +1,9 @@
 
 const WebSocket = require('ws');
 
-const beforeMiddleware = require('../Middleware/BeforeMiddleware');
+let MessageController = require(__dirname + '../Controller/MessageController');
+
+MessageController = new MessageController();
 
 const wss = new WebSocket.Server({
     port: 4444,
@@ -10,12 +12,11 @@ const wss = new WebSocket.Server({
 
 
 
-wss.on('connection', (ws) =>
+wss.on('connection', (websocketClient) =>
 {
-    ws.on('message', (message) =>
+    websocketClient.on('message', (message) =>
     {
-
-        beforeMiddleware.inspect(ws, message);
+        MessageController.newMessage(websocketClient, message)
 
     });
 
