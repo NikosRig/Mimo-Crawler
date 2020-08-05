@@ -12,13 +12,13 @@ class MessageController extends EventEmitter {
 
         this.clients = [];
 
-        this.setBrowserEventListeners();
+        this.setBrowserHandshakeListeners();
     }
 
 
-    setBrowserEventListeners = () =>
+    setBrowserHandshakeListeners = () =>
     {
-        this.on('browser:connect', (browserWsClient) =>
+        this.on('browser:handshake', (browserWsClient) =>
         {
             this.browser = browserWsClient;
 
@@ -26,7 +26,7 @@ class MessageController extends EventEmitter {
             {
                 delete this.browser;
 
-                logger.warn('browserWsClient has close');
+                logger.warn('browserWsClient has closed');
             });
 
             browserWsClient.once('error', () =>
@@ -44,9 +44,9 @@ class MessageController extends EventEmitter {
     {
         message = JSON.parse(message);
 
-        if (message.client_type == "browser") {
+        if (message.client_type == "browser" && message.event == "handshake") {
 
-            this.emit('browser:connect', websocketClient);
+            this.emit('browser:handshake', websocketClient);
 
             return true;
         }
