@@ -18,9 +18,11 @@ describe("Test", () => {
     {
         MessageController = new MessageController();
 
-        let message = JSON.stringify({'client_type': 'browser'});
+        let message = JSON.stringify({'client_type': 'browser', 'event': 'handshake'});
 
-        MessageController.newMessage('browser', message);
+        let browserWsClient = new EventEmitter();
+
+        MessageController.newMessage(browserWsClient, message);
 
         expect(MessageController.browser).exist;
     });
@@ -39,7 +41,7 @@ describe("Test", () => {
             expect(MessageController.browser).not.to.exist;
         })
 
-        let message = JSON.stringify({'client_type': 'browser'});
+        let message = JSON.stringify({'client_type': 'browser', 'event': 'handshake'});
 
         MessageController.newMessage(browserClient, message);
 
