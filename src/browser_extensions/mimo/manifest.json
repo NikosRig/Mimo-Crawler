@@ -1,0 +1,33 @@
+{
+
+  "manifest_version": 2,
+  "name": "Mimo",
+  "version": "1.0",
+
+  "permissions": [
+    "*://localhost/*",
+    "webRequest",
+    "activeTab",
+    "webRequestBlocking",
+    "webNavigation",
+    "browsingData",
+    "tabs",
+    "<all_urls>"
+  ],
+
+
+  "background": {
+    "scripts": [
+      "utils.js",
+      "background.js"
+    ],
+    "persistent": true
+  },
+
+
+
+
+  "web_accessible_resources": ["*"]
+
+
+}

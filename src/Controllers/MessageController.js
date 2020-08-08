@@ -20,6 +20,8 @@ class MessageController extends EventEmitter {
     {
         this.on('browser:handshake', (browserWsClient) =>
         {
+            logger.info('browser connected');
+
             this.browser = browserWsClient;
 
             browserWsClient.once('close', () =>
