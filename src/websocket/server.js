@@ -1,7 +1,7 @@
 
 const WebSocket = require('ws');
 
-let MessageController = require(__dirname + '../Controller/MessageController');
+let MessageController = require(__dirname + '/../Controllers/MessageController');
 
 MessageController = new MessageController();
 
@@ -16,7 +16,7 @@ wss.on('connection', (websocketClient) =>
 {
     websocketClient.on('message', (message) =>
     {
-        MessageController.newMessage(websocketClient, message)
+        MessageController.handle(websocketClient, message)
 
     });
 
