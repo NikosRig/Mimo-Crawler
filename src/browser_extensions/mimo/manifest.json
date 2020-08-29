@@ -6,25 +6,38 @@
 
   "permissions": [
     "*://localhost/*",
+    "*://127.0.0.1/*",
     "webRequest",
     "activeTab",
     "webRequestBlocking",
     "webNavigation",
     "browsingData",
     "tabs",
-    "<all_urls>"
+    "<all_urls>",
+    "privacy",
+    "privacy"
   ],
 
 
   "background": {
     "scripts": [
       "utils.js",
-      "background.js"
+      "handshake.js",
+      "message_handler.js"
     ],
     "persistent": true
   },
 
 
+  "content_scripts": [
+    {
+      "matches": ["http://*/*", "https://*/*"],
+      "js": ["content.js"],
+      "run_at": "document_end"
+    }
+  ],
+
+  "content_security_policy": "default-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src *; object-src 'none'; frame-ancestors http://127.0.0.1:*;",
 
 
   "web_accessible_resources": ["*"]
