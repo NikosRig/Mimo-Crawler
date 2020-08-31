@@ -14,7 +14,6 @@
     "browsingData",
     "tabs",
     "<all_urls>",
-    "privacy",
     "privacy"
   ],
 
@@ -23,7 +22,7 @@
     "scripts": [
       "utils.js",
       "handshake.js",
-      "message_handler.js"
+      "tabController.js"
     ],
     "persistent": true
   },
