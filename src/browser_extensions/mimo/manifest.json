@@ -22,6 +22,7 @@
     "scripts": [
       "utils.js",
       "handshake.js",
+      "Services/tabService.js",
       "tabController.js"
     ],
     "persistent": true
