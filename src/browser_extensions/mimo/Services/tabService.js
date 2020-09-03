@@ -10,6 +10,7 @@ class TabService  {
     }
 
 
+
     /*
     *  @param tabid {integer}
     *  @param delay {integer}
@@ -49,12 +50,15 @@ class TabService  {
     /*
     *  @param tabId {integer}
     *  @param code {string}
-    *  @param delay {integer}
+    *
     *  @return {promise}
     * */
 
-    injectCode = (tabid, code, delay = 0) =>
+    injectCode = (tabid, code, injectionDelay) =>
     {
+        if (!injectionDelay)
+            injectionDelay = 0;
+
         return new Promise((resolve, reject) => {
 
             setTimeout( () => {
@@ -63,7 +67,7 @@ class TabService  {
                     resolve();
                 }).catch( injectionError => { reject(injectionError); });
 
-            }, delay);
+            }, injectionDelay);
 
         });
     }
