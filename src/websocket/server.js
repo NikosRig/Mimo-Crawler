@@ -1,9 +1,9 @@
 
 const WebSocket = require('ws');
 
-let MessageController = require(__dirname + '/../Controllers/MessageController');
+const logger = require(__dirname + '/../Logging/Logger');
 
-MessageController = new MessageController();
+const MessageRouter = require('./MessageRouter.js');
 
 const wss = new WebSocket.Server({
     port: 4444,
@@ -12,12 +12,11 @@ const wss = new WebSocket.Server({
 
 
 
-wss.on('connection', (websocketClient) =>
+wss.on('connection', (websocketConnection) =>
 {
-    websocketClient.on('message', (message) =>
+    websocketConnection.on('message', (message) =>
     {
-        MessageController.handle(websocketClient, message)
-
+        MessageRouter.route(websocketConnection, JSON.parse(message));
     });
 
 });
