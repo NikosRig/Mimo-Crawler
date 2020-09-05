@@ -1,61 +1,32 @@
-const EventEmitter = require('events');
-
-const logger = require('../Logging/Logger');
 
 
-class MessageController extends EventEmitter {
+class MessageController {
 
 
-    constructor() {
-
-        super();
-
-        this.clients = [];
-
-        this.setBrowserHandshakeListeners();
+    constructor(MessageService)
+    {
+        this.MessageService = MessageService;
     }
 
 
-    setBrowserHandshakeListeners = () =>
+    processBrowserMessage = (websocketConnection, message) =>
     {
-        this.on('browser:handshake', (browserWsClient) =>
-        {
-            logger.info('browser connected');
-
-            this.browser = browserWsClient;
-
-            browserWsClient.once('close', () =>
-            {
-                delete this.browser;
-
-                logger.warn('browserWsClient has closed');
-            });
-
-            browserWsClient.once('error', () =>
-            {
-                delete this.browser;
-
-                logger.error('browserWsClient error');
-            });
-
-        });
-
-    }
-
-    newMessage = (websocketClient, message) =>
-    {
-        message = JSON.parse(message);
-
-        if (message.client_type == "browser" && message.event == "handshake") {
-
-            this.emit('browser:handshake', websocketClient);
-
-            return true;
+        if (message.event === "handshake") {
+            this.MessageService.saveBrowser(websocketConnection);
+            return;
         }
 
-
-
+        this.MessageService.sendMessageToClient(message);
     }
+
+    processClientMessage = (websocketConnection, message) =>
+    {
+        this.MessageService.saveClient(websocketConnection, message.token);
+
+        this.MessageService.sendMessageToBrowser(message);
+    }
+
+
 
 
 
