@@ -13,7 +13,7 @@ const closeBrowserWindow = () =>
 
 
 
-let code = (token, code) => {
+let codeInjectionBuilder = (token, code) => {
 
     let mimoToken = `let mimoToken = '${token}';`;
 

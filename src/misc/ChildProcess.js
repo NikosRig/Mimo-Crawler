@@ -101,4 +101,4 @@ class ChildProcess {
 
 }
 
-module.exports = { ChildProcess };
+module.exports = ChildProcess;

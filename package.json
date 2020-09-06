@@ -5,18 +5,12 @@
   "author": "Nikos Rigas",
   "license": "ISC",
   "main": "index.js",
-  "scripts": {
-    "wsserver": "node ./src/websocket/websocketServer.js",
-    "heartbeat": "node ./src/websocket/heartbeat.js",
-    "test:expressvpn": "./node_modules/mocha/bin/mocha ./tests/test_expressvpn.js",
-    "test:middleware": "./node_modules/mocha/bin/mocha ./tests/test_middleware.js"
-  },
+  "scripts": {},
   "dependencies": {
+    "awilix": "^4.2.6",
     "child_process": "^1.0.2",
     "find-process": "^1.4.3",
-    "js-middleware": "^0.3.1",
     "process": "^0.11.10",
-    "require-dir": "^1.2.0",
     "robotjs": "^0.6.0",
     "unique-random-array": "^2.0.0",
     "winston": "^3.2.1",
