@@ -5,8 +5,8 @@ class WebsocketServer {
 
     constructor(opts)
     {
-       this.websocketHost = opts.websocketHost;
-       this.websocketPort = opts.websocketPort;
+       this.websocketHost = opts.appConfig.websocketHost;
+       this.websocketPort = opts.appConfig.websocketPort;
     }
 
 
