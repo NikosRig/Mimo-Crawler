@@ -34,7 +34,7 @@ let codeInjectionBuilder = (token, code) => {
             data: ''
         };
     
-        let webSocket = new WebSocket('ws://localhost:4444');
+        let webSocket = new WebSocket('ws://localhost:4444/browser/crawl');
     
         let crawlData = async () => {
             try {
