@@ -10,8 +10,10 @@ class RoutingService {
 
     handleRequest = (request) =>
     {
-        if (request !== 'object' || !this.routes[request.url])
+        if (typeof request !== 'object' || !this.routes[request.url]) {
+            this.opts.logger.warn('Routing service: url cannot be processed');
             return false;
+        }
 
         this.routes[request.url](this.opts, request);
     }
