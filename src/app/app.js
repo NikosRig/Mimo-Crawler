@@ -1,7 +1,9 @@
 
-
 const container = require('./container');
 
-let ws = container.resolve('websocketServer')
+container.resolve('routes');
 
-ws.start()
+const websocketServer = container.resolve('websocketServer');
+
+websocketServer.start();
+

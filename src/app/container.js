@@ -1,9 +1,9 @@
 
-const awilix = require('awilix')
+const awilix = require('awilix');
 
 const container = awilix.createContainer({
     injectionMode: awilix.InjectionMode.PROXY
-})
+});
 
 
 container.register({
@@ -12,15 +12,17 @@ container.register({
 
     websocketServer: awilix.asClass(require('./Server/websocketServer')).singleton(),
 
-    router: awilix.asClass(require('./Routing/Router')).singleton(),
+    routingService: awilix.asClass(require('./Services/RoutingService')).singleton(),
+    routes: awilix.asFunction(require('./Routing/Routes')).singleton(),
+
 
     messageService: awilix.asClass(require('./Services/MessageService')).singleton(),
 
-    browserMessageController: awilix.asClass(require('./Controllers/UserMessageController')),
+    userMessageController: awilix.asClass(require('./Controllers/UserMessageController')),
     
-    userMessageController: awilix.asClass(require('./Controllers/BrowserMessageController'))
+    browserController: awilix.asClass(require('./Controllers/BrowserMessageController'))
 
-})
+});
 
 
 module.exports = container;
