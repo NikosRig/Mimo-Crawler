@@ -3,25 +3,28 @@
 class MessageService  {
 
 
-    constructor()
+    constructor({logger})
     {
+        this.logger = logger;
+
         this.clients = [];
     }
 
 
-    saveBrowser = (browserWebsocket) =>
+    saveBrowserWebsocket = (browserWebsocket) =>
     {
-        console.log('browser connected');
+        this.browserWebsocket = browserWebsocket;
 
-        this.browser = browserWebsocket;
+        this.browserWebsocket.once('close', () => { delete this.browserWebsocket; });
 
-        this.browser.once('close', () => { delete this.browser; });
-
-        this.browser.on('error', (error) => { this.logger.error(error); });
+        this.browserWebsocket.on('error', (error) => { this.logger.error(error); });
     }
 
-    saveClient = (websocketClient, token) =>
+    saveClientWebsocket = (websocketClient, token) =>
     {
+        if (token !== 'string')
+            return false;
+
         this.clients[token] = websocketClient;
 
         websocketClient.on('error', (error) => { this.logger.error(error); });
@@ -29,24 +32,24 @@ class MessageService  {
         websocketClient.on('close', () => { delete this.clients[token]; });
     }
 
-    sendMessageToBrowser = (message) =>
+    sendMessageToBrowserWebsocket = (message) =>
     {
-        if (!this.browser)
+        if (!this.browserWebsocket)
             return;
 
-        this.browser.send(JSON.stringify(message));
+        this.browserWebsocket.send(JSON.stringify(message));
     }
 
 
-    sendMessageToClient = (request) =>
+    sendMessageToClientWebsocket = (request) =>
     {
-        if (!this.isClientExists(request.message.token))
+        if (!this.isWebsocketClientExists(request.message.token))
             return;
 
         this.clients[request.message.token].send(JSON.stringify(request.message));
     }
 
-    isClientExists = (token) =>
+    isWebsocketClientExists = (token) =>
     {
         return this.clients.hasOwnProperty(token);
     }
