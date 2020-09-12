@@ -8,12 +8,10 @@ class RoutingService {
         this.routes = [];
     }
 
-    handle = (request) =>
+    handleRequest = (request) =>
     {
-        if (!this.routes[request.url]) {
-            console.log('unmatched url');
-            return;
-        }
+        if (request !== 'object' || !this.routes[request.url])
+            return false;
 
         this.routes[request.url](this.opts, request);
     }
