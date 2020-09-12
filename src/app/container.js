@@ -19,9 +19,7 @@ container.register({
 
     messageService: awilix.asClass(require('./Services/MessageService')).singleton(),
 
-    userMessageController: awilix.asClass(require('./Controllers/UserMessageController')),
-    
-    browserController: awilix.asClass(require('./Controllers/BrowserMessageController'))
+    messageController: awilix.asClass(require('./Controllers/MessageController')),
 
 });
 
