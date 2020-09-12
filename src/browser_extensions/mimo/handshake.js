@@ -1,6 +1,5 @@
 
-const websocket = new WebSocket('ws://localhost:4444');
-
+const websocket = new WebSocket('ws://localhost:4444/browser/handshake');
 
 /*
 *  Send handshake message when the connection is opened
@@ -8,9 +7,7 @@ const websocket = new WebSocket('ws://localhost:4444');
 websocket.addEventListener('open', () =>
 {
     let handshakeMessage = {
-        'token': 'master',
-        'client_type': 'browser',
-        'event': 'handshake'
+        'token': 'master'
     };
 
     websocket.send(JSON.stringify(handshakeMessage));
