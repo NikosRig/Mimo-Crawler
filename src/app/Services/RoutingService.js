@@ -19,6 +19,9 @@ class RoutingService {
 
     addRoute = (requestUrl, callback) =>
     {
+        if (typeof requestUrl !== 'string')
+            return false;
+
         this.routes[requestUrl] = callback;
     }
 
