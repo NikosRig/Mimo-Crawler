@@ -1,5 +1,5 @@
 
-class MessageController {
+class UserMessageController {
 
 
     constructor(opts)
@@ -7,28 +7,22 @@ class MessageController {
         this.messageService = opts.messageService;
     }
 
-    processBrowserMessage = (websocketConnection, message) =>
+
+    save = (request) =>
     {
-        if (message.event === "handshake") {
-            this.messageService.saveBrowser(websocketConnection);
-            return;
-        }
+        this.messageService.saveClient(request.websocketConnection, request.message.token);
 
-        this.messageService.sendMessageToClient(message);
-    }
-
-    processClientMessage = (websocketConnection, message) =>
-    {
-        this.messageService.saveClient(websocketConnection, message.token);
-
-        this.messageService.sendMessageToBrowser(message);
+        this.messageService.sendMessageToBrowser(request.message);
     }
 
 
-
+    send = (request) =>
+    {
+        this.messageService.sendMessageToClient(request);
+    }
 
 
 }
 
 
-module.exports = MessageController;
+module.exports = UserMessageController;
