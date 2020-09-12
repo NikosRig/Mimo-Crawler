@@ -3,10 +3,14 @@
 class WebsocketServer {
 
 
-    constructor(opts)
+    constructor({appConfig, routingService})
     {
-       this.websocketHost = opts.appConfig.websocketHost;
-       this.websocketPort = opts.appConfig.websocketPort;
+
+        this.websocketPort = appConfig.websocketPort;
+        this.websocketHost = appConfig.websocketHost
+
+        this.routingService = routingService;
+
     }
 
 
@@ -22,11 +26,14 @@ class WebsocketServer {
 
         this.websocketServer.on('connection', (websocketConnection, request) =>
         {
-
             websocketConnection.on('message', (message) =>
             {
-            });
+                request.websocketConnection = websocketConnection;
 
+                request.message = JSON.parse(message);
+
+                this.routingService.handle(request);
+            });
         });
     }
 
