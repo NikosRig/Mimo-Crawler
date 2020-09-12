@@ -13,6 +13,8 @@ class MessageService  {
 
     saveBrowserWebsocket = (browserWebsocket) =>
     {
+        this.logger.info('browser websocket connected');
+
         this.browserWebsocket = browserWebsocket;
 
         this.browserWebsocket.once('close', () => { delete this.browserWebsocket; });
@@ -34,8 +36,10 @@ class MessageService  {
 
     sendMessageToBrowserWebsocket = (message) =>
     {
-        if (!this.browserWebsocket)
+        if (!this.browserWebsocket) {
+            this.logger.error('browser websocket is not exists');
             return;
+        }
 
         this.browserWebsocket.send(JSON.stringify(message));
     }
