@@ -1,19 +1,19 @@
-module.exports = (opts) => {
+module.exports = ({routingService, messageController}) => {
 
-    opts.routingService.addRoute('/browser/handshake', (opts, request) => {
-        opts.browserController.save(request.websocketConnection);
+    routingService.addRoute('/browser/handshake', (opts, request) => {
+        messageController.browserHandshakeRequest(request);
     });
 
 
 
-    opts.routingService.addRoute('/client/crawl', (opts, request) => {
-        opts.userMessageController.save(request);
+    routingService.addRoute('/', (opts, request) => {
+        messageController.clientWebsocketRequest(request);
     });
 
 
 
-    opts.routingService.addRoute('/browser/crawl', (opts, request) => {
-        opts.userMessageController.send(request);
+    routingService.addRoute('/browser/crawl', (opts, request) => {
+        messageController.browserWebsocketRequest(request);
     });
 
 }
