@@ -32,7 +32,7 @@ class WebsocketServer {
 
                 request.message = JSON.parse(message);
 
-                this.routingService.handle(request);
+                this.routingService.handleRequest(request);
             });
         });
     }
