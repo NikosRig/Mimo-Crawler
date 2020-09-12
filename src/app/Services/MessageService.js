@@ -11,6 +11,8 @@ class MessageService  {
 
     saveBrowser = (browserWebsocket) =>
     {
+        console.log('browser connected');
+
         this.browser = browserWebsocket;
 
         this.browser.once('close', () => { delete this.browser; });
@@ -36,12 +38,12 @@ class MessageService  {
     }
 
 
-    sendMessageToClient = (message) =>
+    sendMessageToClient = (request) =>
     {
-        if (!this.isClientExists(message.token))
+        if (!this.isClientExists(request.message.token))
             return;
 
-        this.clients[message.token].send(JSON.stringify(message));
+        this.clients[request.message.token].send(JSON.stringify(request.message));
     }
 
     isClientExists = (token) =>
