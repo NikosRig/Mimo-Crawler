@@ -9,6 +9,7 @@ const container = awilix.createContainer({
 container.register({
 
     appConfig: awilix.asValue(require('./appConfig')),
+    logger: awilix.asValue(require('../Logging/Logger')),
 
     websocketServer: awilix.asClass(require('./Server/websocketServer')).singleton(),
 
