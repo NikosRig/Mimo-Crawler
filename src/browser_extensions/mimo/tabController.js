@@ -9,7 +9,11 @@ const createAndInject = (message) =>
 {
     tabService.createTab(message.url).then((tabinfo) => {
 
-        let code = codeInjectionBuilder(message.token, message.code);
+        code_injection_service.setToken(message.token);
+
+        code_injection_service.buildCode(message.code);
+
+        let code = code_injection_service.getCode();
 
         return tabService.injectCode(tabinfo.id, code, message.injectionDelay);
 
