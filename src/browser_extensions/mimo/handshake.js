@@ -19,5 +19,5 @@ websocket.onclose = () => {
 };
 
 websocket.onerror = (e) => {
-    console.log(e)
+
 };

@@ -1,4 +1,9 @@
 {
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "blahblah@blah"
+    }
+  },
 
   "manifest_version": 2,
   "name": "Mimo",
@@ -22,7 +27,9 @@
     "scripts": [
       "utils.js",
       "handshake.js",
+      "Services/codeInjectionService.js",
       "Services/tabService.js",
+
       "tabController.js"
     ],
     "persistent": true
@@ -32,8 +39,7 @@
   "content_scripts": [
     {
       "matches": ["http://*/*", "https://*/*"],
-      "js": ["content.js"],
-      "run_at": "document_end"
+      "js": []
     }
   ],
 
