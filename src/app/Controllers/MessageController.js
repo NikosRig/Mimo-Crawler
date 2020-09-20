@@ -7,7 +7,7 @@ class MessageController {
     }
 
 
-    clientWebsocketRequest = (request) =>
+    handleClientWebsocketRequest = (request) =>
     {
         let token = request.message.token;
 
@@ -19,7 +19,7 @@ class MessageController {
     }
 
 
-    browserWebsocketRequest = (request) =>
+    handleBrowserWebsocketRequest = (request) =>
     {
         this.messageService.sendMessageToClientWebsocket(request);
     }
