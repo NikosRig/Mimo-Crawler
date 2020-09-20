@@ -13,6 +13,7 @@ module.exports = ({routingService, messageController}) => {
 
 
     routingService.addRoute('/browser/crawl', (opts, request) => {
+
         messageController.browserWebsocketRequest(request);
     });
 

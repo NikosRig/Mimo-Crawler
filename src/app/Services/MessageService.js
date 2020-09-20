@@ -24,7 +24,7 @@ class MessageService  {
 
     saveClientWebsocket = (websocketClient, token) =>
     {
-        if (token !== 'string')
+        if (typeof token !== 'string')
             return false;
 
         this.clients[token] = websocketClient;
@@ -47,8 +47,12 @@ class MessageService  {
 
     sendMessageToClientWebsocket = (request) =>
     {
-        if (!this.isWebsocketClientExists(request.message.token))
+
+        if (!this.isWebsocketClientExists(request.message.token)) {
+            this.logger.info('websocket client is not exists');
             return;
+        }
+
 
         this.clients[request.message.token].send(JSON.stringify(request.message));
     }
