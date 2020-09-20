@@ -1,3 +1,7 @@
 
 
-let debugMode = true;
+/*
+*  Enable or disable debug mode
+* */
+
+let debugMode = false;

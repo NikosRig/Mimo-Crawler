@@ -54,7 +54,16 @@ class CodeInjectionService {
         
         `;
 
+      this.autoCloseTabOnProduction();
+
       return this;
+    }
+
+
+    autoCloseTabOnProduction = () =>
+    {
+        if (!debugMode)
+            this.code += 'window.close();';
     }
 
 
