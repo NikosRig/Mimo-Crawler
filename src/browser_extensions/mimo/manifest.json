@@ -25,6 +25,7 @@
 
   "background": {
     "scripts": [
+      "settings.js",
       "utils.js",
       "handshake.js",
       "Services/codeInjectionService.js",
