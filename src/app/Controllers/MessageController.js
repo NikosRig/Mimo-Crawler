@@ -21,7 +21,9 @@ class MessageController {
 
     handleBrowserWebsocketRequest = (request) =>
     {
-        this.messageService.sendMessageToClientWebsocket(request);
+        let message = request.message;
+
+        this.messageService.sendMessageToClientWebsocket(message);
     }
 
     browserHandshakeRequest = (request) =>
