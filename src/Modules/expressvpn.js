@@ -1,9 +1,5 @@
 const EventEmitter = require('events');
 
-const path = require('path');
-
-const logger = require(path.resolve(__dirname, '../Logging/Logger'));
-
 const {spawn, spawnSync} = require('child_process');
 
 const uniqueRandomArray = require('unique-random-array');
@@ -11,9 +7,11 @@ const uniqueRandomArray = require('unique-random-array');
 
 class expressvpn extends EventEmitter {
 
-    constructor()
+    constructor({logger})
     {
         super();
+
+        this.logger = logger;
 
         this.getCountryAliases();
     }
@@ -60,7 +58,7 @@ class expressvpn extends EventEmitter {
             let status =  spawnSync('expressvpn', ['status'], {stdio: 'pipe'});
 
             if (String(status.stderr) != '')  {
-                logger.error(String(status.stderr));
+                this.logger.error(String(status.stderr));
                 reject();
             }
 
@@ -91,7 +89,7 @@ class expressvpn extends EventEmitter {
                 return;
             }
 
-            logger.error(stderr);
+            this.logger.error(stderr);
         });
 
         this.keepLogsOnProcessError(disconnect, false);
@@ -142,7 +140,6 @@ class expressvpn extends EventEmitter {
             if (props.randomly)
                 props.countryAlias = this.getRandomCountry();
 
-
             let connect =  spawn('expressvpn', ['connect', props.countryAlias], {stdio: 'pipe', shell: true});
 
             this.keepLogsOnProcessError(connect, true);
@@ -178,14 +175,14 @@ class expressvpn extends EventEmitter {
     keepLogsOnProcessError = (childProcess, writeStderr = false) => {
 
         childProcess.on('error', () => {
-            logger.error('expressvpn process error');
+            this.logger.error('expressvpn process error');
         });
 
         if (!writeStderr)
             return;
 
         childProcess.stderr.on('data', (stderr) => {
-            logger.error(String(stderr));
+            this.logger.error(String(stderr));
         });
 
     }
@@ -193,4 +190,4 @@ class expressvpn extends EventEmitter {
 
 }
 
-module.exports = new expressvpn();
+module.exports = expressvpn;
