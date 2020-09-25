@@ -45,21 +45,25 @@ class MessageService  {
     }
 
 
-    sendMessageToClientWebsocket = (request) =>
+    sendMessageToClientWebsocket = (message) =>
     {
-
-        if (!this.isWebsocketClientExists(request.message.token)) {
+        if (!this.isWebsocketClientExists(message.token)) {
             this.logger.info('websocket client is not exists');
             return;
         }
 
-
-        this.clients[request.message.token].send(JSON.stringify(request.message));
+        this.clients[message.token].send(JSON.stringify(message));
     }
 
     isWebsocketClientExists = (token) =>
     {
         return this.clients.hasOwnProperty(token);
+    }
+
+
+    response = (websocket_connection, message) =>
+    {
+
     }
 
 
