@@ -25,9 +25,6 @@ class StorageService {
     }
 
 
-
-
-
 }
 
 const storage_service = new StorageService();
