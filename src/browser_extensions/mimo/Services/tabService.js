@@ -10,7 +10,6 @@ class TabService  {
     }
 
 
-
     /*
     *  @param tabid {integer}
     *  @param delay {integer}
@@ -46,31 +45,25 @@ class TabService  {
     }
 
 
-
-    /*
-    *  @param tabId {integer}
-    *  @param code {string}
-    *
-    *  @return {promise}
-    * */
-
-    injectCode = (tabid, code, injectionDelay) =>
+    listenForTabIdRequests = () =>
     {
-        if (!injectionDelay)
-            injectionDelay = 0;
+        browser.runtime.onMessage.addListener((msg, sender, sendResponse) => {
 
-        return new Promise((resolve, reject) => {
+            if (msg.infoRequest !== 'tab_id')
+                return;
 
-            setTimeout( () => {
-
-                browser.tabs.executeScript(tabid, { code: code }).then(() => {
-                    resolve();
-                }).catch( injectionError => { reject(injectionError); });
-
-            }, injectionDelay);
-
+            sendResponse(sender.tab.id);
         });
     }
+
+
+    listenForClosingTabs = (callback) =>
+    {
+        browser.tabs.onRemoved.addListener((tab_id, removeInfo) => {
+            callback(tab_id);
+        });
+    }
+
 
 }
 

@@ -4,4 +4,4 @@
 *  Enable or disable debug mode
 * */
 
-let debugMode = false;
+let debugMode = true;

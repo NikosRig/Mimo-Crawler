@@ -10,3 +10,11 @@ const closeBrowserWindow = () =>
     });
 };
 
+
+const consoleLogErrorOnDebugMode = (error) =>
+{
+    if (!debugMode)
+        return;
+
+    console.log(error);
+}
