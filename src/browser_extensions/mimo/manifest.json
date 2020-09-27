@@ -19,7 +19,9 @@
     "browsingData",
     "tabs",
     "<all_urls>",
-    "privacy"
+    "privacy",
+    "storage",
+    "unlimitedStorage"
   ],
 
 
@@ -28,10 +30,9 @@
       "settings.js",
       "utils.js",
       "handshake.js",
-      "Services/codeInjectionService.js",
+      "Services/StorageService.js",
       "Services/tabService.js",
-
-      "tabController.js"
+      "controller.js"
     ],
     "persistent": true
   },
@@ -40,7 +41,8 @@
   "content_scripts": [
     {
       "matches": ["http://*/*", "https://*/*"],
-      "js": []
+      "js": ["content_script.js"],
+      "run_at": "document_end"
     }
   ],
 
