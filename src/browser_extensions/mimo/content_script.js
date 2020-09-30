@@ -1,33 +1,30 @@
-
 let mimoMainFunction = (token, custom_code) => {
-
-    let responseMessage = { token: token, data: ''};
-
-    let executeCustomCode = async () => {
-        try {
-           return new Function(custom_code)();
-
-        } catch (error) { throw new Error(error) }
-    };
 
     let websocket = new WebSocket('ws://localhost:4444/browser/crawl');
 
+    let message = { token: token, errors: []};
+
+    window.onerror =  (msg, url, lineNo, columnNo, error) => {
+        message.errors.push(error.toString());
+        websocket.send(JSON.stringify(message));
+    }
+
+    let executeCustomCode = () => {
+        return new Promise((response, reject) => { eval(custom_code); });
+    };
+
     websocket.onopen = async () => {
 
-        await executeCustomCode().then((result) => {
-
-            responseMessage.data = result;
-
+        await executeCustomCode().then((response) => {
+            message.responseData = response;
         }).catch((error) => {
-             responseMessage.data = error.toString();
+            message.errors.push(error.toString())
         });
 
-        websocket.send(JSON.stringify(responseMessage)); window.close();
+        websocket.send(JSON.stringify(message)); //window.close();
     };
 
 };
-
-
 
 
 browser.runtime.sendMessage({ infoRequest: "tab_id" }).then((tab_id) => {
