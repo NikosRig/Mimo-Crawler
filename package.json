@@ -1,11 +1,9 @@
 {
   "name": "mimo",
   "version": "1.0.0",
-  "description": "",
+  "description": "Mimo browser based crawler",
   "author": "Nikos Rigas",
   "license": "ISC",
-  "main": "index.js",
-  "scripts": {},
   "dependencies": {
     "awilix": "^4.2.6",
     "child_process": "^1.0.2",
@@ -13,6 +11,7 @@
     "process": "^0.11.10",
     "robotjs": "^0.6.0",
     "unique-random-array": "^2.0.0",
+    "web-ext": "^5.1.0",
     "winston": "^3.2.1",
     "ws": "^7.2.5"
   },
