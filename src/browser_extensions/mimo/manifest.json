@@ -29,7 +29,7 @@
     "scripts": [
       "settings.js",
       "utils.js",
-      "handshake.js",
+      "Services/WebsocketService.js",
       "Services/StorageService.js",
       "Services/tabService.js",
       "controller.js"
