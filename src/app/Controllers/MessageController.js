@@ -22,7 +22,7 @@ class MessageController {
         this.messageService.sendMessageToClientWebsocket(message);
     }
 
-    browserHandshakeRequest = (request) =>
+    handleBrowserHandshakeRequest = (request) =>
     {
         let websocketConnection = request.websocketConnection;
 
