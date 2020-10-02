@@ -1,7 +1,7 @@
 module.exports = ({routingService, messageController}) => {
 
     routingService.addRoute('/browser/handshake', (opts, request) => {
-        messageController.browserHandshakeRequest(request);
+        messageController.handleBrowserHandshakeRequest(request);
     });
 
 
