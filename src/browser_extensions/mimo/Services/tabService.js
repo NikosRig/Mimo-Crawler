@@ -57,7 +57,7 @@ class TabService  {
     }
 
 
-    listenForClosingTabs = (callback) =>
+    onTabClose = (callback) =>
     {
         browser.tabs.onRemoved.addListener((tab_id, removeInfo) => {
             callback(tab_id);
