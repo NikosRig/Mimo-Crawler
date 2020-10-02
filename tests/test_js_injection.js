@@ -45,7 +45,7 @@ describe('Tests js injection with asynchronous custom code', () => {
         websocket_client.addEventListener('open', () => {
 
             websocket_client.send(JSON.stringify({
-                token: 'test', url: 'https://www.amazon.com',
+                token: 'test', url: 'http://example.com',
                 code: `setTimeout(() => { response('testAsync') }, 1000) `
                 })
             );
@@ -63,7 +63,8 @@ describe('Tests js injection with asynchronous custom code', () => {
         websocket_client.addEventListener('open', () => {
 
             websocket_client.send(JSON.stringify({
-                    token: 'test', url: 'https://www.hepsiburada.com/',
+                    token: 'test',
+                     url: 'http://example.com',
                     code: `setTimeout(() => { throw new Error('test'); response(1); }, 1000) `
                 })
             );
@@ -75,6 +76,39 @@ describe('Tests js injection with asynchronous custom code', () => {
                 done();
         };
     }).timeout(5000);
+
+
+
+
+
+});
+
+
+describe('Test for general errors', () => {
+
+    before(() => { websocket_client = new WebSocket(websocket_url); });
+
+    after(() => { websocket_client.close(); });
+
+    it('tests if', (done) => {
+        websocket_client.addEventListener('open', () => {
+
+            websocket_client.send(JSON.stringify({
+                    token: 'test',
+                    url: 'http://example.com',
+                    code: `response(document.documentElement.innerHTML);`
+                })
+            );
+
+        });
+
+        websocket_client.onmessage = (message) => {
+            console.log(message.data)
+            done();
+        };
+    }).timeout(5000);
+
+
 
 
 });
