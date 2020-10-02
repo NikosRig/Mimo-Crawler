@@ -15,7 +15,7 @@ class StorageService {
     }
 
 
-    removeTabIdFromStorage = (tab_id) =>
+    removeTabMessageFromStorage = (tab_id) =>
     {
         browser.storage.local.remove(''+ tab_id + '').catch(error =>
         {
