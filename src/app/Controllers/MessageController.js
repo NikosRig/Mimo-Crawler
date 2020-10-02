@@ -9,11 +9,7 @@ class MessageController {
 
     handleClientWebsocketRequest = (request) =>
     {
-        let token = request.message.token;
-
-        let websocketConnection = request.websocketConnection;
-
-        this.messageService.saveClientWebsocket(websocketConnection, token);
+        this.messageService.saveClientWebsocket(request.websocketConnection, request.message.token);
 
         this.messageService.sendMessageToBrowserWebsocket(request.message);
     }
