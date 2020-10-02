@@ -1,7 +1,10 @@
-let mimoJsInjection = (token, custom_code) => {
+
+
+let functionForInjection = (tab_message) => {
 
     let websocket = new WebSocket('ws://localhost:4444/browser/crawl');
-    let message = { token: token, errors: []};
+
+    let message = { token: tab_message.token, errors: []};
 
     window.onerror =  (msg, url, lineNo, columnNo, error) => {
         message.errors.push(error.toString());
@@ -10,7 +13,7 @@ let mimoJsInjection = (token, custom_code) => {
     }
 
     let executeCustomCode = async () => {
-        return new Promise((response, reject) => { eval(custom_code); });
+        return new Promise((response, reject) => { eval(tab_message.code); });
     };
 
     websocket.onopen = async () => {
@@ -25,22 +28,41 @@ let mimoJsInjection = (token, custom_code) => {
 };
 
 
-browser.runtime.sendMessage({ infoRequest: "tab_id" }).then((tab_id) => {
+const retrieveTabMessageFromStorage = async (tab_id) =>
+{
+    let storage_object = await browser.storage.local.get(''+ tab_id + '');
 
-    browser.storage.local.get(''+tab_id+ '').then((e) => {
+    if (!storage_object[tab_id])
+        throw new Error('tab message is not exists');
 
-        let token = e[tab_id].token;
-        let code = e[tab_id].code;
+    return storage_object[tab_id];
+}
 
-        document.documentElement.setAttribute('onreset', "("+mimoJsInjection+")("+JSON.stringify(token)+','+JSON.stringify(code)+")");
-        document.documentElement.dispatchEvent(new CustomEvent('reset'));
-        document.documentElement.removeAttribute('onreset');
+const injectFunctionOnPageContext = async (tab_message) =>
+{
+    if (!tab_message.token)
+        throw new Error('token is missing');
 
-    }).catch((e) => {console.log(e)});
-
-});
-
-
-
+    document.documentElement.setAttribute('onreset', "("+functionForInjection+")("+JSON.stringify(tab_message)+")");
+    document.documentElement.dispatchEvent(new CustomEvent('reset'));
+    document.documentElement.removeAttribute('onreset');
+}
 
 
+
+const sendRequestToGetTabId = () =>
+{
+    return browser.runtime.sendMessage({ infoRequest: "tab_id" });
+}
+
+
+
+sendRequestToGetTabId().then(tab_id => {
+
+  return retrieveTabMessageFromStorage(tab_id);
+
+}).then((tab_message) => {
+
+    return injectFunctionOnPageContext(tab_message);
+
+}).catch(error => console.log(error) );
