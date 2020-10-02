@@ -1,8 +1,5 @@
 
 
-/*
-*  Close the current browser window
-* */
 const closeBrowserWindow = () =>
 {
     browser.windows.getCurrent().then((window) => {
@@ -17,4 +14,13 @@ const consoleLogErrorOnDebugMode = (error) =>
         return;
 
     console.log(error);
+}
+
+const createNewTabAndSaveTabMessage = (tab_message) =>
+{
+    tabService.createTab(tab_message.url).then(tab_info => {
+
+        storage_service.saveTabMessageInStorage(tab_info.id, tab_message);
+
+    }).catch(error => { console.log(error) });
 }
