@@ -1,7 +1,7 @@
 class StorageService {
 
 
-    saveTabIdInStorage = (tab_id, message) =>
+    saveTabMessageInStorage = (tab_id, message) =>
     {
         if (typeof message !== 'object') {
             consoleLogErrorOnDebugMode('SaveMessageInStorage: message must be object');
@@ -9,7 +9,7 @@ class StorageService {
             return;
         }
 
-        browser.storage.local.set({ [tab_id]: message} ).catch((error) => {
+        browser.storage.local.set({[tab_id]: message} ).catch(error => {
             consoleLogErrorOnDebugMode(error);
         });
     }
@@ -17,8 +17,7 @@ class StorageService {
 
     removeTabIdFromStorage = (tab_id) =>
     {
-
-        browser.storage.local.remove(''+ tab_id + '').catch((error) =>
+        browser.storage.local.remove(''+ tab_id + '').catch(error =>
         {
             consoleLogErrorOnDebugMode(error);
         });
