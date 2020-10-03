@@ -1,6 +1,6 @@
 
 
-let functionForInjection = (tab_message) => {
+let mimoFunction = (tab_message) => {
 
     let websocket = new WebSocket('ws://localhost:4444/browser/crawl');
 
@@ -27,6 +27,15 @@ let functionForInjection = (tab_message) => {
 
 };
 
+const injectMimoFunctionOnPageContext = async (tab_message) =>
+{
+    if (!tab_message.token)
+        throw new Error('token is missing');
+
+    document.documentElement.setAttribute('onreset', "("+mimoFunction+")("+JSON.stringify(tab_message)+")");
+    document.documentElement.dispatchEvent(new CustomEvent('reset'));
+    document.documentElement.removeAttribute('onreset');
+}
 
 const retrieveTabMessageFromStorage = async (tab_id) =>
 {
@@ -37,17 +46,6 @@ const retrieveTabMessageFromStorage = async (tab_id) =>
 
     return storage_object[tab_id];
 }
-
-const injectFunctionOnPageContext = async (tab_message) =>
-{
-    if (!tab_message.token)
-        throw new Error('token is missing');
-
-    document.documentElement.setAttribute('onreset', "("+functionForInjection+")("+JSON.stringify(tab_message)+")");
-    document.documentElement.dispatchEvent(new CustomEvent('reset'));
-    document.documentElement.removeAttribute('onreset');
-}
-
 
 
 const sendRequestToGetTabId = () =>
@@ -63,6 +61,6 @@ sendRequestToGetTabId().then(tab_id => {
 
 }).then((tab_message) => {
 
-    return injectFunctionOnPageContext(tab_message);
+    return injectMimoFunctionOnPageContext(tab_message);
 
 }).catch(error => console.log(error) );
