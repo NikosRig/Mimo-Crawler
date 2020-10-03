@@ -4,7 +4,11 @@ let mimoFunction = (tab_message) => {
 
     let websocket = new WebSocket('ws://localhost:4444/browser/crawl');
 
-    let message = { token: tab_message.token, errors: []};
+    let message = {
+        token: tab_message.token,
+        url: tab_message.url,
+        errors: []
+    };
 
     window.onerror =  (msg, url, lineNo, columnNo, error) => {
         message.errors.push(error.toString());
@@ -22,7 +26,7 @@ let mimoFunction = (tab_message) => {
             message.responseData = response;
         }).catch(error => message.errors.push(error.toString()) );
 
-        websocket.send(JSON.stringify(message)); //window.close();
+        websocket.send(JSON.stringify(message));
     };
 
 };
