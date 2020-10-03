@@ -8,6 +8,7 @@ const container = awilix.createContainer({
 
 container.register({
 
+    filesystem: awilix.asValue(require('fs')),
     web_ext: awilix.asValue(require('web-ext')),
     appConfig: awilix.asValue(require('./config/appConfig')),
     logger: awilix.asValue(require('../Logging/Logger')),
