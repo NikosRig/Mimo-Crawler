@@ -1,5 +1,5 @@
 
-const container = require('./container');
+const container = require(__dirname + '/src/app/container');
 
 container.resolve('routes');
 
