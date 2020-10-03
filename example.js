@@ -1,11 +1,11 @@
 const websocket = require('ws');
 
-const websocket_client = new WebSocket('ws://localhost:4444/');
+const websocket_client = new websocket('ws://localhost:4444/');
 
 let message = {
     token: 'example',
     url: 'https://www.example.com/',
-    code: 'response(document.title)'
+    code: 'response(document.documentElement.innerHTML)'
 };
 
 websocket_client.addEventListener('open', () =>
