@@ -13,7 +13,7 @@ class MessageService  {
 
     saveBrowserWebsocket = (browserWebsocket) =>
     {
-        this.logger.info('browser websocket connected');
+        this.logger.info('Browser connected');
 
         this.browserWebsocket = browserWebsocket;
 
@@ -59,14 +59,6 @@ class MessageService  {
     {
         return this.clients.hasOwnProperty(token);
     }
-
-
-    response = (websocket_connection, message) =>
-    {
-
-    }
-
-
 
 
 }
