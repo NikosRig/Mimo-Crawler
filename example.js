@@ -1,21 +1,13 @@
-const websocket = require('ws');
-
-const websocket_client = new websocket('ws://localhost:4444/');
+const mimo_client = require('./src/app/mimoClient');
 
 let message = {
-    token: 'example',
-    url: 'https://www.example.com/',
-    code: 'response(document.documentElement.innerHTML)'
+    url: 'https://www.amazon.com/',
+    code: 'response(document.title)'
 };
 
-websocket_client.addEventListener('open', () =>
-{
-    websocket_client.send(JSON.stringify(message))
-});
 
-websocket_client.onmessage = message =>
-{
-    console.log(JSON.parse(message.data));
+mimo_client.sendMessage({url: 'https://www.example.com', code: `response(document.documentElement.innerHTML)`})
 
-    websocket_client.close();
-};
+mimo_client.addResponseListener((msg) => {
+    console.log(msg)
+})
