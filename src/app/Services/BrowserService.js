@@ -30,13 +30,16 @@ class BrowserService {
         this.web_ext.cmd.run({
 
             firefox: this.firefoxDeveloperEditionBin,
+            pref: {'security.csp.enable': false},
             sourceDir: this.mimo_extension_path,
             noReload: false,
-            startUrl: 'about:about'
-
+            startUrl: 'about:about',
+            noInput: true,
+            keepProfileChanges: true
         }, {
             shouldExitProgram: false,
-        })
+        });
+
     }
 
 }
