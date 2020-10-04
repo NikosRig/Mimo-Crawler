@@ -27,6 +27,7 @@ let mimoFunction = (tab_message) => {
         }).catch(error => message.errors.push(error.toString()) );
 
         websocket.send(JSON.stringify(message));
+        setTimeout(() => { window.close(); }, 2000)
     };
 
 };
