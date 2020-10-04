@@ -103,7 +103,7 @@ mimo_client.addResponseListener((msg) => {
 ```
 
 #### Author
-** Nikos Rigas
+ Nikos Rigas
 
 
 
