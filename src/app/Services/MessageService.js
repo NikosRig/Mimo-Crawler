@@ -24,7 +24,7 @@ class MessageService  {
 
     saveClientWebsocket = (websocketClient, token) =>
     {
-        if (typeof token !== 'string')
+        if (typeof token !== 'string' || this.isWebsocketClientExists(token))
             return false;
 
         this.clients[token] = websocketClient;
