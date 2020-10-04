@@ -20,6 +20,9 @@ class mimoClient {
 
     addResponseListener = (callback) =>
     {
+        if (typeof callback !== 'function')
+            throw new Error('Response listener must be a function')
+
         this.websocket_client.onmessage = message =>
         {
             callback(JSON.parse(message.data))
