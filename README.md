@@ -1,4 +1,4 @@
-# Mimo
+# Mimo Crawler
 **Mimo is a browser based crawler that mimics a user's web navigation.**
 
 ![](https://media.giphy.com/media/aewqyinCkKN1UXSZ9f/giphy.gif)
