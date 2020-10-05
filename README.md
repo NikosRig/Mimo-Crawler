@@ -5,7 +5,8 @@
 
 
 #### What can Mimo do?
-Mimo crawls website data by injecting your javascript code into the page's context.
+Mimo crawls website data using Firefox browser by injecting your javascript code into the page's context.
+You can execute a whole js script into the webpage and then you can "receive" the data that you want. 
 
 
 ### Why Mimo?
