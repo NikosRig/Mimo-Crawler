@@ -94,16 +94,21 @@ Closes the connection with Mimo and terminates the client script.
 const mimo_client = require('./src/app/mimoClient');
 
 let message = {
-    url: 'https://www.example.com',
-    code: `response(document.documentElement.innerHTML)`
+    url: 'https://www.amazon.com/s?bbn=493964&rh=n%3A172282%2Cn%3A%21493964%2Cn%3A281407%2Cp_n_shipping_option-bin%3A3242350011&dc&fst=as%3Aoff&pf_rd_i=16225009011&pf_rd_m=ATVPDKIKX0DER&pf_rd_p=82d03e2f-30e3-48bf-a811-d3d2a6628949&pf_rd_r=MF600JK13S83FRSH3667&pf_rd_s=merchandised-search-4&pf_rd_t=101&qid=1486423355&rnid=493964&ref=s9_acss_bw_cts_AEElectr_T1_w',
+    code: `
+   
+       let product_urls = [];
+       
+       document.querySelectorAll('a.a-link-normal').forEach(aElement => {
+       
+           product_urls.push('https://www.amazon.com' + aElement.getAttribute('href'))
+       })
+            
+       response({category_products: product_urls})
+    `
 };
 
 mimo_client.sendMessage(message)
-
-mimo_client.addResponseListener((msg) => {
-    console.log(msg)
-    mimo_client.close();
-})
 ```
 
 ### Web Spidering
