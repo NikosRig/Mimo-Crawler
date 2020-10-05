@@ -29,6 +29,7 @@ This way:
 ### Requirements
 * [Firefox Developer Edition](https://www.mozilla.org/en-US/firefox/developer/)
 * [node >= 14](https://nodejs.org/en/download/)
+* Xvfb Optional
 
 ### Installation
 
@@ -46,6 +47,12 @@ the DI Container, the Routes, the Services and the Controllers.
 ```bash
 node startMimo.js
 ```
+You can also run Mimo on machines with no display hardware and no physical input devices
+by using Xvfb.
+```bash
+xvfb-run node startMimo.js
+```
+
 
 Then you are ready to use the Mimo API by including mimoClient.js
 
