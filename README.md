@@ -56,11 +56,9 @@ Then you are ready to use the Mimo API by including mimoClient.js
    Sends a new crawl request to Mimo. You have to pass the url that it will be opened and your javascript code.
    
    
- You can also write a script, parse it with node's `fs.readFileSync` and pass it as code parameter.
+ You can also write a script, parse it with node's `fs.readFileSync` and pass it as code's value.
 ```bash
-   let message = {
-    code: fs.readFileSync('./myscript.js', 'utf8');
-};
+   let message = { code: fs.readFileSync('./myscript.js', 'utf8'); };
  ```
    
 In order to get response from Mimo your code must call the `response` method
