@@ -107,7 +107,7 @@ mimo_client.addResponseListener((msg) => {
 Copyright (c) 2020 Nikos Rigas
 
 This software is released under the terms of the GNU General Public License v3.0.
-See the [licence](licence) file for further information.
+See the [licence](https://github.com/NikosRig/Mimo-Crawler/blob/master/LICENCE) file for further information.
 
 
 
