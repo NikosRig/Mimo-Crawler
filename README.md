@@ -18,6 +18,7 @@ This way:
 * Firewall's traceability is diminished
 
 ### Features
+* Simple API
 * Interactive crawling
 * Extremely fast compared to similar tools. 
 * Fully operated by your javascript code
@@ -47,19 +48,43 @@ the DI Container, the Routes, the Services and the Controllers.
 node startMimo.js
 ```
 
-Then you have to implement the class mimoClient.
+Then you are ready to use the Mimo API by including mimoClient.js
 
-* `sendMessage`
-  * Sends a new crawl request to Mimo
-* `addResponseListener`
-  * Calls a function when a response from Mimo is received
-* `close`
-  * Closes the connection with Mimo and terminates the client script.
+#### Mimo Client API
 
-In order to get response from Mimo your code must call the `response` function
-inserting the value that you want to be returned as parameter.
+##### `mimoClient.sendMessage({url: string, code: string})`
+   Sends a new crawl request to Mimo. You have to pass the url that it will be opened and your javascript code.
+   You can also write a script, parse it with node's filesystem module and pass it as code parameter.
+   
+In order to get response from Mimo your code must call the `response` method
+with the value that you want to be returned as a parameter.
+```bash
+let mycode = `setTimeout(() => {
+   //do some things
+   
+  response({
+   pageTitle: document.title,      // Then return an object with the pagetitle and the body.
+   body: document.body.innerHTML
+  }); 
+},2000)`;
+```
+ 
+##### `mimoClient.addResponseListener(callback))`
+ Every time Mimo sends you back a response, this callback function will be called
+ with the response message as parameter.
+ 
+```bash
+mimoClient.addResponseListener((responseMessage) => {
+    console.log(message)
+})
+```
 
-example.js
+#### `mimoClient.close()`
+Closes the connection with Mimo and terminates the client script.
+
+
+#### Basic Example
+
 ```bash
 const mimo_client = require('./src/app/mimoClient');
 
