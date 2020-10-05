@@ -1,8 +1,7 @@
 # Mimo Crawler
 **Mimo is a browser based crawler that mimics a user's web navigation.**
 
-![](https://media.giphy.com/media/aewqyinCkKN1UXSZ9f/giphy.gif)
-
+![demo](example.gif)
 
 #### What can Mimo do?
 Mimo crawls website data using Firefox browser by injecting your javascript code into the page's context.
