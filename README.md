@@ -32,8 +32,8 @@ This way:
 ### Installation
 
 ```bash
-git clone https://github.com/NikosRig/Mimo
-cd Mimo && npm install
+git clone https://github.com/NikosRig/Mimo-Crawler
+cd Mimo-Crawler && npm install
 ```
 
 ### Usage
