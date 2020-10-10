@@ -45,12 +45,12 @@ which includes the websocket server, Firefox Developer Edition,
 the DI Container, the Routes, the Services and the Controllers.
 
 ```bash
-node startMimo.js
+node startMimo.js --firefoxDev firefoxDeveloperEditionPath
 ```
 You can also run Mimo on machines with no display hardware and no physical input devices
 by using Xvfb.
 ```bash
-xvfb-run node startMimo.js
+xvfb-run node startMimo.js --firefoxDev firefoxDeveloperEditionPath
 ```
 
 
@@ -115,6 +115,12 @@ let message = {
 };
 
 mimo_client.sendMessage(message)
+
+mimo_client.addResponseListener((msg) => {
+    console.log(msg)
+    mimo_client.close();
+})
+
 ```
 
 ### Web Spidering
@@ -138,10 +144,6 @@ mimo_client.sendMessage({
     code: spiderCode
 })
 
-mimo_client.addResponseListener((msg) => {
-    console.log(msg)
-    mimo_client.close();
-})
 ```
 
 ### Licence
