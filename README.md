@@ -84,9 +84,7 @@ let mycode = `setTimeout(() => {
  with the response as an argument.
  
 ```bash
-mimoClient.addResponseListener((responseMessage) => {
-    console.log(message)
-})
+mimoClient.addResponseListener(response => console.log(response) )
 ```
 
 #### `mimoClient.close()`
