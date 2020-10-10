@@ -45,12 +45,12 @@ which includes the websocket server, Firefox Developer Edition,
 the DI Container, the Routes, the Services and the Controllers.
 
 ```bash
-node startMimo.js --firefoxDev firefoxDeveloperEditionPath
+node startMimo.js --firefoxDev firefoxDevBinaryPath
 ```
 You can also run Mimo on machines with no display hardware and no physical input devices
 by using Xvfb.
 ```bash
-xvfb-run node startMimo.js --firefoxDev firefoxDeveloperEditionPath
+xvfb-run node startMimo.js --firefoxDev firefoxDevBinaryPath
 ```
 
 
