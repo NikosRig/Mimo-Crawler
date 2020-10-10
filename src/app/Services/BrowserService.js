@@ -7,6 +7,7 @@ class BrowserService {
         this.web_ext = web_ext;
         this.firefoxDeveloperEditionBin = appConfig.firefoxDeveloperEditionBinaryPath;
         this.fs = filesystem;
+        this.productionMode = appConfig.productionMode;
 
         this.checkIfFirefoxBinaryExists();
 
@@ -32,7 +33,7 @@ class BrowserService {
             firefox: this.firefoxDeveloperEditionBin,
             pref: {'security.csp.enable': false},
             sourceDir: this.mimo_extension_path,
-            noReload: false,
+            noReload: this.productionMode,
             startUrl: 'about:about',
             noInput: true,
             keepProfileChanges: true
