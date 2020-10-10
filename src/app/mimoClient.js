@@ -23,25 +23,31 @@ class mimoClient {
         if (typeof callback !== 'function')
             throw new Error('Response listener must be a function')
 
-        this.websocket_client.onmessage = message =>
+        this.websocket_client.onmessage = response =>
         {
-            callback(JSON.parse(message.data))
+            response = JSON.parse(response.data);
+
+            delete response.token;
+
+            callback(response);
         };
     }
 
-    sendMessage = async (message) => {
+    crawl = async (options) => {
 
-        message.token = this.token;
-         message = JSON.stringify(message);
+        options.token = this.token;
+
+        options = JSON.stringify(options);
 
          if (this.websocket_client.readyState === this.websocket_client.OPEN) {
-             this.websocket_client.send(message);
+             this.websocket_client.send(options);
              return;
          }
 
         try {
             await this.waitForWebsocketConnectionToBeOpened(this.websocket_client);
-            this.websocket_client.send(message);
+
+            this.websocket_client.send(options);
         } catch (err) {
             console.error(err);
         }
