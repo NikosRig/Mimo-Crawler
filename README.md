@@ -1,30 +1,26 @@
 # Mimo Crawler
-**Mimo is a browser based crawler that mimics a user's web navigation.**
+***Mimo is a "state of the art" web crawler that uses real Firefox and javascript to crawl webpages.***
 
 ![demo](example.gif)
 
-#### What can Mimo do?
-Mimo crawls website data using Firefox browser by injecting your javascript code into the page's context.
-You can execute a whole js script into the webpage and then you can "receive" the data that you want. 
-
-
 ### Why Mimo?
-What makes Mimo special is that unlike other browser based crawlers,
-it uses websockets to remotely control the browser. 
+What makes Mimo special is that instead of using DevTools Protocol and a browser in headless mode,
+it uses websockets as a communication channel between a **non-headless** browser and the client.
+You can interact and crawl the webpage by evaluating your javascript code into the page's context.
+
 
 This way: 
 * An extremely high-speed crawling is achieved
 * Firewall's traceability is diminished
+* Headless browser detectors can be bypassed
 
 ### Features
-* Simple API
+* Simple Client API
 * Interactive crawling
 * Extremely fast compared to similar tools. 
 * Fully operated by your javascript code
 * Web spidering
  
-
-## Getting started
 
 ### Requirements
 * [Firefox Developer Edition](https://www.mozilla.org/en-US/firefox/developer/)
@@ -38,11 +34,11 @@ git clone https://github.com/NikosRig/Mimo-Crawler
 cd Mimo-Crawler && npm install
 ```
 
-### Usage
+### Getting started
 
-You have to start by executing the main part of the application
-which includes the websocket server, Firefox Developer Edition,
-the DI Container, the Routes, the Services and the Controllers.
+#### Mimo Server
+
+You have to start by executing the Mimo's server.
 
 ```bash
 node startMimo.js --firefoxDev firefoxDevBinaryPath
