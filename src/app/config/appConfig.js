@@ -1,7 +1,7 @@
 
 const appConfig = {
 
-    websocketHost: '127.0.0.1',
+    websocketHost: '0.0.0.0',
     websocketPort: 4444,
     firefoxDeveloperEditionBinaryPath: '/usr/bin/firefox-developer-edition'
 
