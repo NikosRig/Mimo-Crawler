@@ -55,7 +55,7 @@ Then you are ready to use the Mimo API by including mimoClient.js
 #### Using the Mimo client API
    
    
-##### `mimoClient.sendMessage(options)`
+##### `mimoClient.crawl(options)`
    Sends a new crawl request to Mimo.
 - `options` {Object}
   - `url` {String} The url that you want to be crawled.
@@ -81,7 +81,7 @@ let mycode = `setTimeout(() => {
  
 ##### `mimoClient.addResponseListener(callback)`
  Every time Mimo sends you back a response, this callback function will be called
- with the response message as parameter.
+ with the response as an argument.
  
 ```bash
 mimoClient.addResponseListener((responseMessage) => {
