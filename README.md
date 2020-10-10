@@ -1,30 +1,26 @@
 # Mimo Crawler
-**Mimo is a browser based crawler that mimics a user's web navigation.**
+***Mimo is a "state of the art" web crawler that uses real Firefox and javascript to crawl webpages.***
 
 ![demo](example.gif)
 
-#### What can Mimo do?
-Mimo crawls website data using Firefox browser by injecting your javascript code into the page's context.
-You can execute a whole js script into the webpage and then you can "receive" the data that you want. 
-
-
 ### Why Mimo?
-What makes Mimo special is that unlike other browser based crawlers,
-it uses websockets to remotely control the browser. 
+What makes Mimo special is that instead of using DevTools Protocol and a browser in headless mode,
+it uses websockets as a communication channel between a **non-headless** browser and the client.
+You can interact and crawl the webpage by evaluating your javascript code into the page's context.
+
 
 This way: 
 * An extremely high-speed crawling is achieved
 * Firewall's traceability is diminished
+* Headless browser detectors can be bypassed
 
 ### Features
-* Simple API
+* Simple Client API
 * Interactive crawling
 * Extremely fast compared to similar tools. 
 * Fully operated by your javascript code
 * Web spidering
  
-
-## Getting started
 
 ### Requirements
 * [Firefox Developer Edition](https://www.mozilla.org/en-US/firefox/developer/)
@@ -38,33 +34,36 @@ git clone https://github.com/NikosRig/Mimo-Crawler
 cd Mimo-Crawler && npm install
 ```
 
-### Usage
+### Getting started
 
-You have to start by executing the main part of the application
-which includes the websocket server, Firefox Developer Edition,
-the DI Container, the Routes, the Services and the Controllers.
+
+#### Starting with the Mimo Server
+ 
+ You must first start the server with your firefox dev edition binary path as the value of  ```--firefoxDev``` argument.
 
 ```bash
-node startMimo.js
+node startMimo.js --firefoxDev path
 ```
 You can also run Mimo on machines with no display hardware and no physical input devices
-by using Xvfb.
+by using Xvfb. Mimo will be still using a non-headless firefox.
 ```bash
-xvfb-run node startMimo.js
+xvfb-run node startMimo.js --firefoxDev path
 ```
-
 
 Then you are ready to use the Mimo API by including mimoClient.js
 
-#### Mimo Client API
-
-##### `mimoClient.sendMessage({url: string, code: string})`
-   Sends a new crawl request to Mimo. You have to pass the url that it will be opened and your javascript code.
+#### Using the Mimo client API
    
    
+##### `mimoClient.sendMessage(options)`
+   Sends a new crawl request to Mimo.
+- `options` {Object}
+  - `url` {String} The url that you want to be crawled.
+  - `code` {String} The javascript code that will be evaluated into the webpage.
+    
  You can also write a script, parse it with node's `fs.readFileSync` and pass it as code's value.
 ```bash
-   let message = { code: fs.readFileSync('./myscript.js', 'utf8'); };
+   let options = { code: fs.readFileSync('./myscript.js', 'utf8'); };
  ```
    
 In order to get response from Mimo your code must call the `response` method
@@ -93,7 +92,6 @@ mimoClient.addResponseListener((responseMessage) => {
 #### `mimoClient.close()`
 Closes the connection with Mimo and terminates the client script.
 
-
 #### Basic Example
 
 ```bash
@@ -115,7 +113,14 @@ let message = {
 };
 
 mimo_client.sendMessage(message)
+
+mimo_client.addResponseListener((msg) => {
+    console.log(msg)
+    mimo_client.close();
+})
+
 ```
+
 
 ### Web Spidering
 Every request that you send to mimo creates a new tab, 
@@ -138,10 +143,6 @@ mimo_client.sendMessage({
     code: spiderCode
 })
 
-mimo_client.addResponseListener((msg) => {
-    console.log(msg)
-    mimo_client.close();
-})
 ```
 
 ### Licence
