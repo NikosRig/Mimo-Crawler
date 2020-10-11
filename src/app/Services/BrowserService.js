@@ -33,7 +33,10 @@ class BrowserService {
         this.web_ext.cmd.run({
 
             firefox: this.firefox_binary_path,
-            pref: {'security.csp.enable': false},
+            pref: {
+                'security.csp.enable': false,
+                'dom.webnotifications.enabled': false
+            },
             sourceDir: this.mimo_extension_path,
             noReload: this.productionMode,
             startUrl: 'about:about',
