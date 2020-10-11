@@ -38,15 +38,16 @@ cd Mimo-Crawler && npm install
 
 #### Starting with the Mimo Server
  
- You must first start the server with your firefox binary path as the value of  ```--firefoxDev``` argument.
-
+ You must first start the server by executing startMimo.js.
+ - `--firefox` (optional) Overrides the default firefox binary path.
+ 
 ```bash
-node startMimo.js --firefox path
+node startMimo.js 
 ```
 You can also run Mimo on machines with no display hardware and no physical input devices
 by using Xvfb. Mimo will be still using a non-headless firefox.
 ```bash
-xvfb-run node startMimo.js --firefox path
+xvfb-run node startMimo.js 
 ```
 
 Then you are ready to use the Mimo API by including mimoClient.js
