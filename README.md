@@ -112,7 +112,7 @@ let message = {
     `
 };
 
-mimo_client.sendMessage(message)
+mimo_client.crawl(message)
 
 mimo_client.addResponseListener((msg) => {
     console.log(msg)
@@ -138,7 +138,7 @@ let spiderCode = `
     response(document.title)
 `;
 
-mimo_client.sendMessage({
+mimo_client.crawl({
     url: 'https://www.example.com',
     code: spiderCode
 })
