@@ -3,15 +3,21 @@
 let mimoFunction = (tab_message) => {
 
     let websocket = new WebSocket('ws://localhost:4444/browser/crawl');
+    let closeTabDelay = 5000;
+
+    if (tab_message.disableWindowAlert)
+        alert = () => {};
+
+    if (tab_message.closeTabDelay)
+        closeTabDelay = tab_message.closeTabDelay;
 
     let message = {
         token: tab_message.token,
         url: tab_message.url,
-        errors: []
     };
 
     window.onerror =  (msg, url, lineNo, columnNo, error) => {
-        message.errors.push(error.toString());
+        message.error = error.toString();
         websocket.send(JSON.stringify(message));
         return true;
     }
@@ -24,10 +30,13 @@ let mimoFunction = (tab_message) => {
 
         await executeCustomCode().then(response => {
             message.responseData = response;
-        }).catch(error => message.errors.push(error.toString()) );
+        }).catch(error => {
+            message.error = error.toString()
+        });
 
         websocket.send(JSON.stringify(message));
-        setTimeout(() => { window.close(); }, 2000)
+
+        setTimeout(() => { window.close(); }, closeTabDelay)
     };
 
 };

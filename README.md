@@ -60,6 +60,8 @@ Then you are ready to use the Mimo API by including mimoClient.js
 - `options` {Object}
   - `url` {String} The url that you want to be crawled.
   - `code` {String} The javascript code that will be evaluated into the webpage.
+  - `closeTabDelay` optional {millisecond} Overrides the tab's default closing time
+  - `disableWindowAlert` optional {boolean} If is setted to true it disables window.alert()
     
  You can also write a script, parse it with node's `fs.readFileSync` and pass it as code's value.
 ```bash
