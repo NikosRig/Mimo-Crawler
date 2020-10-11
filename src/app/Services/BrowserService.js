@@ -4,8 +4,10 @@ class BrowserService {
 
     constructor({web_ext, appConfig, filesystem})
     {
+
         this.web_ext = web_ext;
-        this.firefoxDeveloperEditionBin = appConfig.firefoxDeveloperEditionBinaryPath;
+        this.firefox_binary_path = appConfig.firefox_binary_path;
+
         this.fs = filesystem;
         this.productionMode = appConfig.productionMode;
 
@@ -16,8 +18,8 @@ class BrowserService {
 
     checkIfFirefoxBinaryExists = () =>
     {
-        if (!this.fs.existsSync(this.firefoxDeveloperEditionBin))
-            throw new Error('Firefox developer edition cannot be found in ' + this.firefoxDeveloperEditionBin);
+        if (!this.fs.existsSync(this.firefox_binary_path))
+            throw new Error('Firefox cannot be found in ' + this.firefox_bin_path);
     }
 
     setMimoBrowserExtensionPath = () =>
@@ -26,11 +28,11 @@ class BrowserService {
     }
 
 
-    startFirefoxDeveloperEdition = () =>
+    startFirefox = () =>
     {
         this.web_ext.cmd.run({
 
-            firefox: this.firefoxDeveloperEditionBin,
+            firefox: this.firefox_binary_path,
             pref: {'security.csp.enable': false},
             sourceDir: this.mimo_extension_path,
             noReload: this.productionMode,

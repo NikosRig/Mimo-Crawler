@@ -7,4 +7,4 @@ container.resolve('routes');
 
 container.resolve('websocketServer').start();
 
-container.resolve('browserService').startFirefoxDeveloperEdition();
+container.resolve('browserService').startFirefox();

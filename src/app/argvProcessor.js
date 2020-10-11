@@ -1,8 +1,8 @@
 
 let argvProcessor = ({argv, appConfig}) =>
 {
-    if (argv.firefoxDev)
-        appConfig.firefoxDeveloperEditionBinaryPath = argv.firefoxDev;
+    if (argv.firefox)
+        appConfig.firefox_binary_path = argv.firefox;
 
 
 }
