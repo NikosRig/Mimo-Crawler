@@ -1,5 +1,5 @@
 # Mimo Crawler
-***Mimo is a "state of the art" web crawler that uses real Firefox and javascript to crawl webpages.***
+***Mimo is a "state of the art" web crawler that uses non-headless Firefox and js injection to crawl webpages.***
 
 ![demo](example.gif)
 
@@ -21,11 +21,10 @@ This way:
 * Fully operated by your javascript code
 * Web spidering
  
-
 ### Requirements
 * [Firefox Developer Edition](https://www.mozilla.org/en-US/firefox/developer/)
 * [node >= 14](https://nodejs.org/en/download/)
-* Xvfb Optional
+* Xvfb (optional)
 
 ### Installation
 
