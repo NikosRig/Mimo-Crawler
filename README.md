@@ -22,7 +22,7 @@ This way:
 * Web spidering
  
 ### Requirements
-* [Firefox Developer Edition](https://www.mozilla.org/en-US/firefox/developer/)
+* Firefox
 * [node >= 14](https://nodejs.org/en/download/)
 * Xvfb (optional)
 
@@ -38,15 +38,16 @@ cd Mimo-Crawler && npm install
 
 #### Starting with the Mimo Server
  
- You must first start the server with your firefox dev edition binary path as the value of  ```--firefoxDev``` argument.
-
+ You must first start the server by executing startMimo.js.
+ - `--firefox` (optional) Overrides the default firefox binary path.
+ 
 ```bash
-node startMimo.js --firefoxDev path
+node startMimo.js 
 ```
 You can also run Mimo on machines with no display hardware and no physical input devices
 by using Xvfb. Mimo will be still using a non-headless firefox.
 ```bash
-xvfb-run node startMimo.js --firefoxDev path
+xvfb-run node startMimo.js 
 ```
 
 Then you are ready to use the Mimo API by including mimoClient.js
@@ -59,8 +60,8 @@ Then you are ready to use the Mimo API by including mimoClient.js
 - `options` {Object}
   - `url` {String} The url that you want to be crawled.
   - `code` {String} The javascript code that will be evaluated into the webpage.
-  - `closeTabDelay` optional {millisecond} Overrides the tab's default closing time
-  - `disableWindowAlert` optional {boolean} If is setted to true it disables window.alert()
+  - `closeTabDelay` (optional) {millisecond} Overrides the tab's default closing time
+  - `disableWindowAlert` (optional) {boolean} If is setted to true it disables window.alert()
     
  You can also write a script, parse it with node's `fs.readFileSync` and pass it as code's value.
 ```bash
