@@ -47,7 +47,7 @@ class MessageService  {
 
     sendMessageToClientWebsocket = (message) =>
     {
-        if (!this.isWebsocketClientExists(message.token)) 
+        if (!this.isWebsocketClientExists(message.token))
             return;
 
 
