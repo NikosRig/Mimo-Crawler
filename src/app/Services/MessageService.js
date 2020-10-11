@@ -13,7 +13,7 @@ class MessageService  {
 
     saveBrowserWebsocket = (browserWebsocket) =>
     {
-        this.logger.info('Browser connected');
+        this.logger.info('Firefox has connected');
 
         this.browserWebsocket = browserWebsocket;
 
@@ -37,7 +37,7 @@ class MessageService  {
     sendMessageToBrowserWebsocket = (message) =>
     {
         if (!this.browserWebsocket) {
-            this.logger.error('browser websocket is not exists');
+            this.logger.error('Firefox connection cannot be found.');
             return;
         }
 
@@ -47,10 +47,9 @@ class MessageService  {
 
     sendMessageToClientWebsocket = (message) =>
     {
-        if (!this.isWebsocketClientExists(message.token)) {
-            this.logger.info('websocket client is not exists');
+        if (!this.isWebsocketClientExists(message.token)) 
             return;
-        }
+
 
         this.clients[message.token].send(JSON.stringify(message));
     }
