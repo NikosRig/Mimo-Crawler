@@ -31,23 +31,25 @@ This way:
 ```bash
 git clone https://github.com/NikosRig/Mimo-Crawler
 cd Mimo-Crawler && npm install
+sudo npm link
 ```
 
 ### Getting started
 
 
-#### Starting with the Mimo Server
+#### Start Firefox and the Mimo Server
  
- You must first start the server by executing startMimo.js.
  - `--firefox` (optional) Overrides the default firefox binary path.
  
 ```bash
-node startMimo.js 
+mimo-start
 ```
-You can also run Mimo on machines with no display hardware and no physical input devices
-by using Xvfb. Mimo will be still using a non-headless firefox.
+
+You can also use Mimo on machines with no display hardware and no physical input devices
+with the help of Xvfb. Mimo will be continue using a non-headless Firefox.
+
 ```bash
-xvfb-run node startMimo.js 
+xvfb-run mimo-start
 ```
 
 Then you are ready to use the Mimo API by including mimoClient.js

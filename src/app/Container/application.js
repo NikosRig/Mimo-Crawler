@@ -1,5 +1,5 @@
 
-const container = require(__dirname + '/src/app/container');
+const container = require('./container');
 
 container.resolve('processArgv');
 

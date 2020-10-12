@@ -1,9 +1,12 @@
 {
   "name": "mimo",
-  "version": "1.0.0",
-  "description": "Mimo browser based crawler",
+  "version": "1.0.1",
+  "description": "Mimo is a state of the art web crawler that uses non-headless Firefox and js injection to crawl webpages.",
   "author": "Nikos Rigas",
-  "license": "ISC",
+  "license": "GPL-3.0",
+  "bin": {
+    "mimo-start": "./src/bin/initMimo.js"
+  },
   "dependencies": {
     "awilix": "^4.2.6",
     "child_process": "^1.0.2",
