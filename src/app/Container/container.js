@@ -11,7 +11,7 @@ container.register({
     filesystem: awilix.asValue(require('fs')),
     argv: awilix.asValue(require('minimist')(process.argv.slice(2))),
     web_ext: awilix.asValue(require('web-ext')),
-    appConfig: awilix.asValue(require('../Config/appConfig')),
+    appConfig: awilix.asValue(require('../../config/appConfig')),
     processArgv: awilix.asFunction(require('../Utils/argvProcessor')),
     logger: awilix.asValue(require('../Utils/Logger')),
     websocketServer: awilix.asClass(require('../Server/websocketServer')).singleton(),
