@@ -24,7 +24,7 @@ class BrowserService {
 
     setMimoBrowserExtensionPath = () =>
     {
-        this.mimo_extension_path = __dirname +'/../../browser_extensions/mimo';
+        this.mimo_extension_path = __dirname +'/../FirefoxExtensions/mimo';
     }
 
 

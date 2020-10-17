@@ -8,10 +8,14 @@
     "type": "git",
     "url": "https://github.com/NikosRig/Mimo-Crawler"
   },
-  "publishConfig": { "registry": "https://npm.pkg.github.com/@NikosRig" },
-
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/@NikosRig"
+  },
   "bin": {
     "mimo-start": "./src/bin/initMimo.js"
+  },
+  "scripts": {
+    "testClientWebsocket": "./node_modules/mocha/bin/mocha tests/clientApiTests/test_clientWebsocket.js --reporter spec"
   },
   "dependencies": {
     "awilix": "^4.2.6",
