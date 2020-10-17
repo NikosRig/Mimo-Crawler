@@ -13,7 +13,7 @@ container.register({
     web_ext: awilix.asValue(require('web-ext')),
     appConfig: awilix.asValue(require('../Config/appConfig')),
     processArgv: awilix.asFunction(require('../Utils/argvProcessor')),
-    logger: awilix.asValue(require('../../Logging/Logger')),
+    logger: awilix.asValue(require('../Utils/Logger')),
     websocketServer: awilix.asClass(require('../Server/websocketServer')).singleton(),
     routingService: awilix.asClass(require('../Services/RoutingService')).singleton(),
     routes: awilix.asFunction(require('../Routing/Routes')).singleton(),

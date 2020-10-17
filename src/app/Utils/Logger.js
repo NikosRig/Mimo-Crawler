@@ -3,10 +3,11 @@
 const winston = require('winston');
 const path = require('path');
 
-const errorLog = path.resolve(__dirname, 'logs/errors.log');
-const infoLog = path.resolve(__dirname, 'logs/info.log');
-const warning = path.resolve(__dirname, 'logs/warnings.log');
-const verbose = path.resolve(__dirname, 'logs/verbose.log');
+//const errorLog = path.resolve(__dirname, 'logs/errors.log');
+const errorLog = path.resolve(__dirname, '../../../logs/error.log');
+const infoLog = path.resolve(__dirname, '../../../logs/info.log');
+const warning = path.resolve(__dirname, '../../../logs/warnings.log');
+const verbose = path.resolve(__dirname, '../../../logs/verbose.log');
 
 const logger = winston.createLogger({
 
