@@ -1,6 +1,5 @@
 
 const websocket = require('ws');
-const logger = require(__dirname + '/../Logging/Logger');
 const { v1: uuidv1 } = require('uuid');
 
 
